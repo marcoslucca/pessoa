@@ -2,6 +2,7 @@ package br.com.fundatec.pessoa.configuration;
 
 import br.com.fundatec.pessoa.commons.ApiError;
 import br.com.fundatec.pessoa.exceptions.DuplicatedCpfException;
+import br.com.fundatec.pessoa.exceptions.IrregularCpfException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -25,5 +26,12 @@ public class ExceptionAdvice {
             return exception.getCause().getLocalizedMessage();
         }
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IrregularCpfException.class)
+    public ApiError onException(IrregularCpfException exception) {
+        return new ApiError("IRREGULAR_CPF", extractMessage(exception));
+    }
+
 
 }
