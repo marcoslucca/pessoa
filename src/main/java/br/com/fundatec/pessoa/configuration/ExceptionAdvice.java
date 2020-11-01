@@ -21,7 +21,7 @@ public class ExceptionAdvice {
         if (exception.getCause() == null && exception.getMessage() != null) {
             return exception.getMessage();
         } else if (exception.getCause() == null && exception.getMessage() == null) {
-            return "";
+            return "O seu CPF não está correto!";
         } else {
             return exception.getCause().getLocalizedMessage();
         }
